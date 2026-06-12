@@ -9,8 +9,7 @@ echo ""
 # Ask for administrator privileges
 if [ "$EUID" -ne 0 ]; then
   echo "[!] This uninstaller needs administrator privileges to remove catbrowser."
-  echo "[*] Please enter your password below:"
-  exec sudo "$0" "$@"
+  echo "[*] Please run this with sudo"
   exit
 fi
 
