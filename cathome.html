@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background: #111;
+            color: orange;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 { border: 2px solid orange; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px orange; }
+        .input-group { margin: 20px; }
+        input { padding: 12px; width: 300px; border-radius: 5px; border: 1px solid orange; background: #222; color: white; outline: none; }
+        button { padding: 12px 20px; background: orange; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
+        button:hover { background: #ffcc00; }
+        .shortcuts { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>CAT BROWSER HOME</h1>
+
+    <div class="input-group">
+        <input type="text" id="urlInput" placeholder="Enter Website URL (e.g. example.com)">
+        <button onclick="go()">GO</button>
+    </div>
+
+    <div class="shortcuts">
+        <button onclick="location.href='https://www.google.com'">🏠 GOOGLE HOME</button>
+        <button onclick="location.href='https://www.youtube.com/watch?v=IxX_QHay02M&list=RDIxX_QHay02M&start_radio=1'">🐱 OIIA OIIA</button>
+        <button onclick="location.href='https://www.windows93.net'">Windows 93</button>
+        <button onclick="location.href='https://www.youtube.com/watch?v=9J62hGda9BQ&list=RD9J62hGda9BQ&start_radio=1'">Nyan Cat</button>
+        <button onclick="location.href='https://youtube.com/shorts/beh_SP52TaQ?si=xy5XKaQ9cw3jVqaM'">the best thing ever</button>
+    </div>
+
+    <script>
+        function go() {
+            let u = document.getElementById('urlInput').value;
+            if (!u) return;
+            if (!u.includes('://')) u = 'https://' + u;
+            window.location.href = u;
+        }
+        // Allow pressing "Enter" to go
+        document.getElementById('urlInput').onkeydown = function(e) {
+            if(e.key === 'Enter') go();
+        };
+    </script>
+</body>
+</html>
