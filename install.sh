@@ -20,24 +20,36 @@ DESKTOP_FILE="/usr/share/applications/catbrowser.desktop"
 
 echo "[+] Creating deployment folder at $TARGET_DIR..."
 mkdir -p "$TARGET_DIR"
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/catbrowser -o catbrowser
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/webview.h -o webview.h
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/sammy.png -o sammy.png
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/cathome.html -o cathome.html
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/about.html -o about.html
+
+# Download files directly into the true user's home directory
+# (Using $SUDO_USER ensures it goes to /home/username even when run with sudo)
+USER_HOME=$(eval echo "~$SUDO_USER")
+
+echo "[+] Downloading assets to home directory..."
+curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/catbrowser -o "$USER_HOME/catbrowser"
+curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/webview.h -o "$USER_HOME/webview.h"
+curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/sammy.png -o "$USER_HOME/sammy.png"
+curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/cathome.html -o "$USER_HOME/cathome.html"
+curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/about.html -o "$USER_HOME/about.html"
 
 # 2. Copy the binary and necessary resources to the deployment path
 echo "[+] Deploying application assets..."
-cp ~/catbrowser /usr/local/bin/deps
-cp ~/about.html /usr/local/bin/deps
-cp ~/sammy.png /usr/local/bin/deps
-cp ~/webview.h /usr/local/bin/deps
-cp ~/cathome.html /usr/local/bin/deps
-rm -rf cathome.html
-rm -rf sammy.png
-rm -rf webview.h
-rm -rf about.html
-rm -rf catbrowser
+cp "$USER_HOME/catbrowser" "$TARGET_DIR/"
+cp "$USER_HOME/about.html" "$TARGET_DIR/"
+cp "$USER_HOME/sammy.png" "$TARGET_DIR/"
+cp "$USER_HOME/webview.h" "$TARGET_DIR/"
+cp "$USER_HOME/cathome.html" "$TARGET_DIR/"
+
+# Ensure the deployed binary has execution rights
+chmod +x "$TARGET_DIR/catbrowser"
+
+# Clean up the downloaded files from the home directory
+echo "[+] Cleaning up temporary files..."
+rm -f "$USER_HOME/cathome.html"
+rm -f "$USER_HOME/sammy.png"
+rm -f "$USER_HOME/webview.h"
+rm -f "$USER_HOME/about.html"
+rm -f "$USER_HOME/catbrowser"
 
 # 3. Create the system desktop menu shortcut inside the Internet group
 echo "[+] Generating XFCE Application Shortcut..."
@@ -62,4 +74,4 @@ echo " SUCCESS: catbrowser downloading is complete!                   "
 echo " Look in your xfce apps > internet to launch it.                 "
 echo "================================================================="
 echo ""
-echo "to uninstall catbrowser run curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/uninstall.sh -o uninstall.sh | bash "
+echo "to uninstall catbrowser run: curl -fsSL https://raw.githubusercontent.com/redcat243/deps/main/uninstall.sh | bash"
