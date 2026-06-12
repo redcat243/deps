@@ -21,8 +21,7 @@ DESKTOP_FILE="/usr/share/applications/catbrowser.desktop"
 echo "[+] Creating deployment folder at $TARGET_DIR..."
 mkdir -p "$TARGET_DIR"
 
-# Download files directly into the true user's home directory
-# (Using $SUDO_USER ensures it goes to /home/username even when run with sudo)
+# Dynamically find the real user's home directory instead of /root/
 USER_HOME=$(eval echo "~$SUDO_USER")
 
 echo "[+] Downloading assets to home directory..."
