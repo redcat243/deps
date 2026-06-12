@@ -8,7 +8,7 @@ echo ""
 
 # Ask for administrator privileges
 if [ "$EUID" -ne 0 ]; then
-  echo "[!] This uninstaller needs administrator privileges to remove system folders."
+  echo "[!] This uninstaller needs administrator privileges to remove catbrowser."
   echo "[*] Please enter your password below:"
   exec sudo "$0" "$@"
   exit
