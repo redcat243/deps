@@ -20,11 +20,11 @@ DESKTOP_FILE="/usr/share/applications/catbrowser.desktop"
 
 echo "[+] Creating deployment folder at $TARGET_DIR..."
 mkdir -p "$TARGET_DIR"
-curl -fssl https://raw.githubusercontent/redcat243/deps/main/catbrowser -o ~/
-curl -fssl https://raw.githubusercontent/redcat243/deps/main/webview.h -o ~/
-curl -fssl https://raw.githubusercontent/redcat243/deps/main/sammy.png -o ~/
-curl -fssl https://raw.githubusercontent/redcat243/deps/main/cathome.html -o ~/
-curl -fssl https://raw.githubusercontent/redcat243/deps/main/about.html -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/catbrowser -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/webview.h -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/sammy.png -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/cathome.html -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/about.html -o ~/
 
 # 2. Copy the binary and necessary resources to the deployment path
 echo "[+] Deploying application assets..."
