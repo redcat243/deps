@@ -20,11 +20,11 @@ DESKTOP_FILE="/usr/share/applications/catbrowser.desktop"
 
 echo "[+] Creating deployment folder at $TARGET_DIR..."
 mkdir -p "$TARGET_DIR"
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/catbrowser -o ~/
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/webview.h -o ~/
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/sammy.png -o ~/
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/cathome.html -o ~/
-curl -fsSL https://raw.githubusercontent/redcat243/deps/main/about.html -o ~/
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/catbrowser -o catbrowser
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/webview.h -o webview.h
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/sammy.png -o sammy.png
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/cathome.html -o cathome.html
+curl -fsSL https://raw.githubusercontent/redcat243/deps/main/about.html -o about.html
 
 # 2. Copy the binary and necessary resources to the deployment path
 echo "[+] Deploying application assets..."
@@ -33,6 +33,11 @@ cp ~/about.html /usr/local/bin/deps
 cp ~/sammy.png /usr/local/bin/deps
 cp ~/webview.h /usr/local/bin/deps
 cp ~/cathome.html /usr/local/bin/deps
+rm -rf cathome.html
+rm -rf sammy.png
+rm -rf webview.h
+rm -rf about.html
+rm -rf catbrowser
 
 # 3. Create the system desktop menu shortcut inside the Internet group
 echo "[+] Generating XFCE Application Shortcut..."
